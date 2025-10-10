@@ -1,0 +1,200 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Shoe Try-On AR</title>
+
+  <!-- ✅ Correct DeepAR script -->
+  <script src="https://cdn.jsdelivr.net/npm/deepar/js/deepar.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+    }
+
+    #deepar-canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    #shoe-menu {
+      position: fixed;
+      bottom: 0;
+      left: 0; /* 👈 remove centering offset */
+      width: 100%;
+      background: rgba(10, 10, 10, 0.7);
+      padding: 20px 10px;
+      display: flex;
+      justify-content: flex-start; /* 👈 align items to the start */
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 18px;
+      box-sizing: border-box;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      scroll-behavior: smooth;
+    }
+
+    .shoe-item {
+      flex: 0 0 auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #1c1c1c, #121212);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ddd;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .shoe-item:hover {
+      transform: translateY(-6px);
+      color: #00eaff;
+      border-color: rgba(0, 234, 255, 0.6);
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.2);
+    }
+
+    .shoe-item.active {
+      border: 2px solid #00eaff;
+      background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+      box-shadow: 0 0 25px #00eaff;
+      color: #00eaff;
+      transform: scale(1.05);
+    }
+
+    #feet-text {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 22px;
+      border-radius: 10px;
+      z-index: 5;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #loader-wrapper {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #00eaff;
+      font-size: 24px;
+      font-weight: 600;
+      z-index: 10;
+      letter-spacing: 1px;
+    }
+
+    #shoe-menu::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    #shoe-menu::-webkit-scrollbar-thumb {
+      background: rgba(0, 234, 255, 0.3);
+      border-radius: 5px;
+    }
+
+    #shoe-menu::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 234, 255, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loader-wrapper">Loading AR Experience...</div>
+  <div id="feet-text">Move your feet into the camera view...</div>
+
+  <canvas id="deepar-canvas"></canvas>
+
+  <div id="shoe-menu">
+    <div class="shoe-item active" data-effect="./Effects/airforceeffect.deepar">Shoe 1</div>
+    <div class="shoe-item" data-effect="./Effects/godfinaleffect.deepar">Shoe 2</div>
+    <div class="shoe-item" data-effect="./Effects/new-balance-574.deepar">Shoe 3</div>
+    <div class="shoe-item" data-effect="./Effects/nike-air-max.deepar">Shoe 4</div>
+    <div class="shoe-item" data-effect="./Effects/nike-airforce1.deepar">Shoe 5</div>
+    <div class="shoe-item" data-effect="./Effects/nike-dunk.deepar">Shoe 6</div>
+    <div class="shoe-item" data-effect="./Effects/on-run-cloudmonster.deepar">Shoe 7</div>
+    <div class="shoe-item" data-effect="./Effects/on-run-cloudrock.deepar">Shoe 8</div>
+    <div class="shoe-item" data-effect="./Effects/puma-suede-classic.deepar">Shoe 9</div>
+  </div>
+
+  <script>
+    (async function () {
+      const canvas = document.getElementById('deepar-canvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const loader = document.getElementById("loader-wrapper");
+      const feetText = document.getElementById("feet-text");
+
+      const deepAR = await deepar.initialize({
+        licenseKey: 'b01f3b5b5780f6e2dafb174e658a4cda8bfeb980290755d2f019b7e030c29b3a71c0284e9b6f4ad0',
+        canvas: canvas,
+        effect: './Effects/airforceeffect.deepar', // default
+        frameDelay: 6,
+        additionalOptions: {
+          cameraConfig: { facingMode: "environment" },
+          hint: "footInit"
+        }
+      });
+
+      loader.style.display = "none";
+
+      deepAR.callbacks.onFeetTracked = (leftFoot, rightFoot) => {
+        if (leftFoot.detected || rightFoot.detected) {
+          feetText.style.display = "none";
+          deepAR.callbacks.onFeetTracked = undefined;
+        }
+      };
+
+      const shoeItems = document.querySelectorAll('.shoe-item');
+      shoeItems.forEach(item => {
+        item.addEventListener('click', async () => {
+          const effectPath = item.getAttribute('data-effect');
+
+          // ✅ Show loading overlay while changing shoes
+          loader.textContent = "Loading shoe...";
+          loader.style.display = "flex";
+
+          try {
+            await deepAR.switchEffect(effectPath);
+            // ✅ Hide loader after successful switch
+            loader.style.display = "none";
+          } catch (err) {
+            console.error("Error loading shoe:", err);
+            loader.textContent = "Failed to load shoe!";
+            setTimeout(() => (loader.style.display = "none"), 1500);
+          }
+
+          shoeItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        });
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
