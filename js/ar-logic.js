@@ -16,11 +16,12 @@
             frameDelay: 6,
             additionalOptions: {
                 cameraConfig: { facingMode: "environment" },
-                hint: "footInit",
-                // Correctly place exposure setting here
-                toneMappingExposure: 3.0
+                hint: "footInit"
             }
         });
+
+        // Force the light to be brighter after loading
+        deepAR.changeParameterFloat("SunLight", "intensity", 3.0);
     } catch (error) {
         console.error(error);
         alert("DeepAR Error: " + error);
