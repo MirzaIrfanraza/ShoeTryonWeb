@@ -1,9 +1,9 @@
 body {
     margin: 0;
     overflow: hidden;
-    background: #000;
+    background: #ffffff;
     font-family: "Poppins", sans-serif;
-    color: #fff;
+    color: #000;
 }
 
 #deepar-canvas {
@@ -42,11 +42,11 @@ body {
 #loader-wrapper {
     position: fixed;
     inset: 0;
-    background: #000;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #00eaff;
+    color: #333;
     font-size: 24px;
     font-weight: 600;
     z-index: 10;

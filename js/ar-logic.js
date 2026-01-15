@@ -13,6 +13,9 @@
             canvas: canvas,
             effect: './Effects/Shoe.deepar', // default
             frameDelay: 6,
+            // Lighting adjustments
+            toneMappingExposure: 2.0,
+            envMapIntensity: 1.5,
             additionalOptions: {
                 cameraConfig: { facingMode: "environment" },
                 hint: "footInit"
@@ -34,5 +37,10 @@
         }
     };
 
+    // Handle window resize to keep canvas full screen and correct resolution
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
 
 })();
