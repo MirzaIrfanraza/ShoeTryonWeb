@@ -6,9 +6,26 @@
 // Get the base URL (removing the file name)
 const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
 const targetUrl = baseUrl + "index.html";
-
+console.log("Model Viewer")
 // Generate QR code
 const qrImage = document.getElementById('qr-code');
 if (qrImage) {
-    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(targetUrl)}`;
+    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(targetUrl)}`;
+}
+
+// Modal Logic
+const arButton = document.getElementById('ar-button');
+const qrContainer = document.getElementById('qr-container');
+const closeQr = document.getElementById('close-qr');
+
+if (arButton && qrContainer) {
+    arButton.addEventListener('click', () => {
+        qrContainer.style.display = 'flex';
+    });
+}
+
+if (closeQr && qrContainer) {
+    closeQr.addEventListener('click', () => {
+        qrContainer.style.display = 'none';
+    });
 }
