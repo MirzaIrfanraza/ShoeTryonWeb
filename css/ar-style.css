@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+}
+
+#deepar-canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+#feet-text {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 22px;
+    border-radius: 10px;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#loader-wrapper {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00eaff;
+    font-size: 24px;
+    font-weight: 600;
+    z-index: 10;
+    letter-spacing: 1px;
+}

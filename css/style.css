@@ -1,0 +1,134 @@
+:root {
+  --primary-color: #00eaff;
+  --bg-color: #0b0b0b;
+  --text-color: #ffffff;
+  --accent-color: #ff0055;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* Fallback if Google Font fails to load */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 0;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #fff, var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 3s ease-in-out infinite alternate;
+  z-index: 10;
+  pointer-events: none;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  text-align: center;
+  line-height: 1.6;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.cta-button {
+  padding: 18px 48px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--bg-color);
+  background: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.3);
+  text-decoration: none;
+  display: inline-block;
+  z-index: 10;
+}
+
+.cta-button:hover {
+  background: #fff;
+  box-shadow: 0 0 40px rgba(0, 234, 255, 0.6);
+  transform: translateY(-5px);
+}
+
+model-viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  --poster-color: transparent;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background: rgba(0,0,0,0.4); */
+  /* Optional: dim background for text legibility */
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px rgba(0, 234, 255, 0.2);
+  }
+
+  100% {
+    text-shadow: 0 0 20px rgba(0, 234, 255, 0.6);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(20px) scale(1.1);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+
+  .cta-button {
+    padding: 15px 35px;
+    width: 80%;
+    text-align: center;
+  }
+}

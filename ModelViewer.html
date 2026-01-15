@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Future Footwear | 3D View</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="css/viewer-style.css">
+</head>
+
+<body>
+
+    <model-viewer src="./3D/Shoe.glb" camera-controls auto-rotate shadow-intensity="1" tone-mapping="neutral" ar
+        ar-modes="webxr scene-viewer quick-look" interaction-prompt="auto">
+    </model-viewer>
+
+    <div id="qr-container">
+        <img id="qr-code" alt="Scan for AR">
+        <div id="qr-label">Scan for AR</div>
+    </div>
+
+    <a href="ARScene.html" class="ar-button">Show in AR</a>
+
+    <script src="js/viewer-logic.js" defer></script>
+
+</body>
+
+</html>
