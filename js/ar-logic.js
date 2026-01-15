@@ -9,7 +9,7 @@
     let deepAR;
     try {
         deepAR = await deepar.initialize({
-            licenseKey: '93fd23143258e4fc89c18bfec6122b2dd9700076a8a205c7b6ba1b889714ae8b41dd48c2d79035f1',
+            licenseKey: 'ccca4d45a10a8b605b8df411f765e5af0e63a12a318b13e0dd7be7c3e482ddfd4b0bca8231aec30f',
             canvas: canvas,
             effect: './Effects/Shoe.deepar', // default
             frameDelay: 6,
