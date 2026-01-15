@@ -11,14 +11,14 @@
         deepAR = await deepar.initialize({
             licenseKey: '116b29c05f7f337a2040431bbd50821bbc57b01fec2a7765230e5fd99f4f6af7013ead36839ad23a',
             canvas: canvas,
+
             effect: './Effects/Shoe.deepar', // default
             frameDelay: 6,
-            // Lighting adjustments
-            toneMappingExposure: 2.0,
-            envMapIntensity: 1.5,
             additionalOptions: {
                 cameraConfig: { facingMode: "environment" },
-                hint: "footInit"
+                hint: "footInit",
+                // Correctly place exposure setting here
+                toneMappingExposure: 3.0
             }
         });
     } catch (error) {
