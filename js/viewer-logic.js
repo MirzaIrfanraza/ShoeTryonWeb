@@ -20,7 +20,13 @@ const closeQr = document.getElementById('close-qr');
 
 if (arButton && qrContainer) {
     arButton.addEventListener('click', () => {
-        qrContainer.style.display = 'flex';
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            // Directly navigate to AR scene (index.html)
+            window.location.href = targetUrl;
+        } else {
+            qrContainer.style.display = 'flex';
+        }
     });
 }
 
