@@ -9,8 +9,8 @@
     let deepAR;
     try {
         deepAR = await deepar.initialize({
-            // licenseKey: '116b29c05f7f337a2040431bbd50821bbc57b01fec2a7765230e5fd99f4f6af7013ead36839ad23a',
-            licenseKey: '93fd23143258e4fc89c18bfec6122b2dd9700076a8a205c7b6ba1b889714ae8b41dd48c2d79035f1',
+            licenseKey: '116b29c05f7f337a2040431bbd50821bbc57b01fec2a7765230e5fd99f4f6af7013ead36839ad23a',
+            // licenseKey: '93fd23143258e4fc89c18bfec6122b2dd9700076a8a205c7b6ba1b889714ae8b41dd48c2d79035f1',
             canvas: canvas,
 
             effect: './Effects/Shoe.deepar', // default
